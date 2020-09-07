@@ -25,6 +25,7 @@ import Orders from './components/Orders';
 import SideNavigation from './components/SideNavigation';
 import HeaderBar from './components/HeaderBar';
 import useStyles from './styles/styles';
+import HomeScreen from './components/HomeScreen';
 
 function Copyright() {
   return (
@@ -58,26 +59,7 @@ export default function Dashboard() {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-            {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <Chart />
-              </Paper>
-            </Grid>
-            {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits />
-              </Paper>
-            </Grid>
-            {/* Recent Orders */}
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Orders />
-              </Paper>
-            </Grid>
-          </Grid>
+          <HomeScreen />
           <Box pt={4}>
             <Copyright />
           </Box>
