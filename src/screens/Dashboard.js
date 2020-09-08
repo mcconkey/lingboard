@@ -1,8 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -14,18 +12,19 @@ import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
-import Chart from './components/Chart';
-import Deposits from './components/Deposits';
-import Orders from './components/Orders';
-import SideNavigation from './components/SideNavigation';
-import HeaderBar from './components/HeaderBar';
-import useStyles from './styles/styles';
-import HomeScreen from './components/HomeScreen';
+import { mainListItems, secondaryListItems } from '../listItems';
+import Chart from '../components/Chart';
+import Deposits from '../components/Deposits';
+import Orders from '../components/Orders';
+import SideNavigation from '../components/SideNavigation';
+import HeaderBar from '../components/HeaderBar';
+import useStyles from '../styles/styles';
+import HomeScreen from '../components/HomeScreen';
+import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+import LoadLedger from './LoadLedger';
 
 function Copyright() {
   return (
@@ -52,6 +51,7 @@ export default function Dashboard() {
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
+    <BrowserRouter>
     <div className={classes.root}>
       <CssBaseline />
         <HeaderBar />
@@ -59,12 +59,21 @@ export default function Dashboard() {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          <HomeScreen />
+            <Switch>
+              <Route path="/load">
+                <LoadLedger />
+              </Route>
+              <Route
+                path="/">
+                <HomeScreen />
+              </Route>
+            </Switch>
           <Box pt={4}>
             <Copyright />
           </Box>
         </Container>
       </main>
     </div>
+    </BrowserRouter>
   );
 }
