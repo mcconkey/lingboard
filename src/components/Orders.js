@@ -7,6 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Title from '../Title';
+import connect from 'react-redux';
 
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Orders() {
+const Orders = ({ledger}) => {
   const classes = useStyles();
   return (
     <React.Fragment>
@@ -47,13 +48,9 @@ export default function Orders() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {ledger.map((row) => (
             <TableRow key={row.id}>
               <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -66,3 +63,13 @@ export default function Orders() {
     </React.Fragment>
   );
 }
+
+const mapStateToProps = state => {
+  const { ledger } = state;
+  return ledger;
+};
+
+export default connect(
+  mapStateToProps,
+  null,
+)(Orders);

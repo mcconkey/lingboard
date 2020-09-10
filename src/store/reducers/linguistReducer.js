@@ -10,6 +10,9 @@ export default function (state = initialState, action) {
             const { linguist } = action.payload;
             return { ...state, linguist}
         }
+        default:{
+            return state;
+        }
     }
     return state;
 }

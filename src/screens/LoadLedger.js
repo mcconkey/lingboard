@@ -3,14 +3,14 @@ import { Paper } from '@material-ui/core';
 import { CSVReader } from 'react-papaparse'
 import useStyles from '../styles/styles';
 import { connect } from 'react-redux';
-import { setLeger } from '../store/actions/ledgerActions';
+import { setLedger } from '../store/actions/ledgerActions';
 
 const LoadLedger = ({ledger}) => {
 
     console.log(ledger);
 
     const handleOnDrop = (data) => {
-        setLeger(data);
+        setLedger(data);
         console.log('------------LEDGER THING---------------')
         console.log(ledger);
         console.log('---------------------------')
@@ -43,10 +43,11 @@ const LoadLedger = ({ledger}) => {
 
 const mapStateToProps = state => {
     const { ledger } = state;
+    console.log("called to mapState");
     return ledger;
 };
 
 export default connect(
     mapStateToProps,
-    { setLeger },
+    { setLedger },
   )(LoadLedger);
