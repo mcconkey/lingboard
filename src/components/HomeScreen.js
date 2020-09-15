@@ -4,8 +4,6 @@ import useStyles from '../styles/styles'
 import { Grid,
          Paper,
          } from '@material-ui/core/';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MenuIcon from '@material-ui/icons/Menu';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from  './Orders';

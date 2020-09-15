@@ -7,6 +7,9 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Title from '../Title';
+import { useRecoilValue } from 'recoil';
+import { ledgerState } from '../atoms/ledgerAtom';
+import { latestLedgerState } from '../selectors/ledgerSelector';
 
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
@@ -31,29 +34,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Orders() {
+const Orders = () => {
   const classes = useStyles();
+
+  //const data = useRecoilValue(ledgerState);
+  const data = useRecoilValue(latestLedgerState);
+  
+  console.log("====DATA====");
+  console.log(data.length)
+  console.log(data);
+
   return (
     <React.Fragment>
-      <Title>Recent Orders</Title>
+      <Title>Recent Ledger Entries</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
             <TableCell>Name</TableCell>
-            <TableCell>Ship To</TableCell>
-            <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
+            <TableCell>Change</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell>{row.date}</TableCell>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.shipTo}</TableCell>
-              <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
+          {data.length && data.map((row) => (
+            <TableRow>
+              <TableCell>{row.data.timestamp}</TableCell>
+              <TableCell>{row.data.firstName + " " + row.data.lastName}</TableCell>
+              <TableCell>{displayChange(row.data)}</TableCell>
             </TableRow>
           ))}
         </TableBody>
@@ -65,4 +72,20 @@ export default function Orders() {
       </div>
     </React.Fragment>
   );
-}
+};
+
+const displayChange = (rowArray) => {
+  let changesString = "";
+  let omitAttribs = ['timestamp', 'firstName', 'lastName'];
+  for (const attrib in rowArray) {
+   // console.log(attrib);
+    if(!omitAttribs.includes(attrib)){
+      if(rowArray[attrib] != ""){
+        changesString += ` ${attrib}: ${rowArray[attrib]}` ;
+      }
+    }
+  }
+  return changesString;
+};
+
+export default Orders;
