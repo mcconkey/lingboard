@@ -3,22 +3,21 @@ import clsx from 'clsx';
 import useStyles from '../styles/styles'
 import { AppBar, 
          Toolbar, 
-         IconButton, 
+
          Typography, 
-         Badge, 
+
          } from '@material-ui/core/';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import MenuIcon from '@material-ui/icons/Menu';
+
 
 
 const HeaderBar =  () => {
     const [open, setOpen] = React.useState(true);
-    const handleDrawerOpen = () => {
-      setOpen(true);
-    };
-    const handleDrawerClose = () => {
-      setOpen(false);
-    };
+    // const handleDrawerOpen = () => {
+    //   setOpen(true);
+    // };
+    // const handleDrawerClose = () => {
+    //   setOpen(false);
+    // };
     const classes = useStyles();
 
     return(

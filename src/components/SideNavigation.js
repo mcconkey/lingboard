@@ -1,19 +1,19 @@
 import React from 'react';
-import { Drawer, IconButton, Divider, List, makeStyles } from '@material-ui/core';
+import { Drawer, Divider, List,  } from '@material-ui/core';
 import clsx from 'clsx';
 import { mainListItems } from '../listItems';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+//import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import useStyles from '../styles/styles';
 
 
 function SideNavigation() {
   const [open, setOpen] = React.useState(true);
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  // const handleDrawerOpen = () => {
+  //   setOpen(true);
+  // };
+  // const handleDrawerClose = () => {
+  //   setOpen(false);
+  // };
 
   const classes = useStyles();
   return (

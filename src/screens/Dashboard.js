@@ -1,30 +1,17 @@
 import React from 'react';
-import clsx from 'clsx';
+//import clsx from 'clsx';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Box from '@material-ui/core/Box';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from '../listItems';
-import Chart from '../components/Chart';
-import Deposits from '../components/Deposits';
-import Orders from '../components/Orders';
 import SideNavigation from '../components/SideNavigation';
 import HeaderBar from '../components/HeaderBar';
 import useStyles from '../styles/styles';
 import HomeScreen from '../components/HomeScreen';
 import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import LoadLedger from './LoadLedger';
+import Linguist from './Linguist';
+import Roster from './Roster';
 
 function Copyright() {
   return (
@@ -41,14 +28,14 @@ function Copyright() {
 
 export default function Dashboard() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+  //const [open, setOpen] = React.useState(true);
+  // const handleDrawerOpen = () => {
+  //   setOpen(true);
+  // };
+  // const handleDrawerClose = () => {
+  //   setOpen(false);
+  // };
+  //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
     <BrowserRouter>
@@ -62,6 +49,12 @@ export default function Dashboard() {
             <Switch>
               <Route path="/load">
                 <LoadLedger />
+              </Route>
+              <Route path="/roster">
+                <Roster />
+              </Route>
+              <Route path="/linguist/:linguistName">
+                <Linguist />
               </Route>
               <Route
                 path="/">
