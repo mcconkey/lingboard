@@ -7,6 +7,7 @@ import { Grid,
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from  './Orders';
+import ReadingScoresChart from './ReadingScoresChart';
 
 
 const HomeScreen = () => {
@@ -15,7 +16,7 @@ const HomeScreen = () => {
     return (
         <Grid container spacing={3}>
         {/* Chart */}
-        <Grid item xs={12} md={8} lg={9}>
+        <Grid item xs={12} md={4} lg={6}>
           <Paper className={fixedHeightPaper}>
             <Chart />
           </Paper>
@@ -23,7 +24,12 @@ const HomeScreen = () => {
         {/* Recent Deposits */}
         <Grid item xs={12} md={4} lg={3}>
           <Paper className={fixedHeightPaper}>
-            <Deposits />
+            <ReadingScoresChart />
+          </Paper>
+        </Grid>
+        <Grid item xs={12} md={4} lg={3}>
+          <Paper className={fixedHeightPaper}>
+            <ReadingScoresChart />
           </Paper>
         </Grid>
         {/* Recent Orders */}

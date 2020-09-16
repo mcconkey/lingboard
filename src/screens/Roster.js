@@ -14,7 +14,11 @@ const Roster = () => {
     const classes = useStyles();
     const roster = useRecoilValue(rosterState);
 
-    const isRoster = Object.entries(roster).length == 0 ? false: true;
+    const isRoster = Object.entries(roster).length === 0 ? false: true;
+
+    if(isRoster){
+        console.log(roster);
+    }
 
     return (
         <div>
@@ -30,13 +34,22 @@ const Roster = () => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {isRoster && Object.keys(roster).map((name) => (
-            <TableRow key={name}>
-              <TableCell><Link to={`linguist/${toUrl(name)}`}>{name}</Link></TableCell>
-              <TableCell>-</TableCell>
-              <TableCell>-</TableCell>
-              <TableCell>-</TableCell>
-              <TableCell>-</TableCell>
+          {isRoster && Object.keys(roster).map((key) => (
+            <TableRow key={key}>
+                <TableCell><Link to={`linguist/${toUrl(key)}`}>{roster[key].name}</Link></TableCell>
+                <TableCell>
+                    { roster[key].attributes.hasOwnProperty("reading") ? 
+                    roster[key].attributes["reading"] : "-"
+                }</TableCell>
+                <TableCell>
+                    { roster[key].attributes.hasOwnProperty("listening") ? 
+                    roster[key].attributes["listening"] : "-" }
+                </TableCell>
+                <TableCell>
+                    { roster[key].attributes.hasOwnProperty("trainingHours") ? 
+                    roster[key].attributes["trainingHours"] : "-"}</TableCell>
+                <TableCell>{                    roster[key].attributes.hasOwnProperty("nextSLTE") ? 
+                    roster[key].attributes["nextSLTE"] : "-"}</TableCell>
             </TableRow>
           ))}
         </TableBody>

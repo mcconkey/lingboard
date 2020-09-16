@@ -21,6 +21,7 @@ export class Linguist {
 
     public appendToLedger(row: any){
         this.ledgerRows.push(row);
+        this.extractAttributesFromRow(row);
     }
     
     public setAttributes(attribs: {}){
@@ -32,4 +33,14 @@ export class Linguist {
         this.attributes[key]  = value;
     }
 
+    extractAttributesFromRow(row: any): void{
+        let omitAttribs = ['timestamp', 'firstName', 'lastName'];        
+        for (const attrib in row) {
+            if(!omitAttribs.includes(attrib)){
+                if(row[attrib] !== ""){
+                this.attributes[attrib] = row[attrib];
+                }
+            }
+        }
+    }
 }

@@ -53,7 +53,7 @@ export default function Dashboard() {
               <Route path="/roster">
                 <Roster />
               </Route>
-              <Route path="/linguist/:linguistName">
+              <Route path="/linguist/:linguistKey">
                 <Linguist />
               </Route>
               <Route
