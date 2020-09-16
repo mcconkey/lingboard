@@ -29,10 +29,33 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
   );
 };
 
+const totalScores(roster){
+    let scoreBuckets = [
+        {name: 'SubPro', value: 0},
+        {name: '2', value: 0},
+        {name: '2+', value: 0},
+        {name: '3 or Higher', value: 0}];
+    
+    for( linguists in roster) {
+        if(linguist.attributes.hasOwnProperty("reading")){
+            let readingScore = Number(linguist.attributes.reading);
+            if(readingScore < 2){
+                scoreBuckets[0].value++;
+            }else if(readingScore === 2){
+                scoreBuckets[1].value++;
+            }else if(readingScore > 2 && readingScore < 3){
+                scoreBuckets[2].value++;
+            }
+        }
+    }
+}
+
 export default function ScoresChart() {
   const theme = useTheme();
 
   const roster = useRecoilValue(rosterState);
+
+  
 
   return (
     <React.Fragment>
