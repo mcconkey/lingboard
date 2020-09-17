@@ -51,19 +51,19 @@ const totalScores = (roster = {}) => {
         for(var linguist in roster) { // here linguist is the roster key for each linguist
             
             // verify that there is a reading score for the lingusit
-            if(roster[linguist].attributes?.hasOwnProperty("reading")){
+            if(roster[linguist].attributes?.hasOwnProperty("listening")){
 
                 // set reading score make sure that score is typed as a Number to facilitate comparision
-                let readingScore = Number(roster[linguist].attributes.reading);
+                let listeningScore = Number(roster[linguist].attributes.listening);
                 
                 //increment the correct score bucket
-                if(readingScore < 2){
+                if(listeningScore < 2){
                     scoreBuckets[0].value++;
-                }else if(readingScore === 2){
+                }else if(listeningScore === 2){
                     scoreBuckets[1].value++;
-                }else if(readingScore > 2 && readingScore < 3){
+                }else if(listeningScore > 2 && listeningScore < 3){
                     scoreBuckets[2].value++;
-                }else if(readingScore > 2.5){
+                }else if(listeningScore > 2.5){
                     scoreBuckets[3].value++;
                 }
             }
@@ -73,19 +73,19 @@ const totalScores = (roster = {}) => {
   return scoreBuckets;
 }
 
-export default function ScoresChart() {
+export default function ListeningScoresChart() {
 
   const roster = useRecoilValue(rosterState);
 
-  const readingData = totalScores(roster);
+  const listeningData = totalScores(roster);
 
   return (
     <React.Fragment>
-      <Title>Reading</Title>
+      <Title>Listening</Title>
       <ResponsiveContainer>
         <PieChart>
         <Pie
-          data={readingData} 
+          data={listeningData} 
           //innerRadius={60}
           outerRadius='100%' 
           fill="#8884d8"
@@ -95,7 +95,7 @@ export default function ScoresChart() {
           //paddingAngle={5}
         >
         	{
-          	readingData.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]}/>)
+          	listeningData.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]}/>)
           }
         </Pie>
         <Tooltip />
