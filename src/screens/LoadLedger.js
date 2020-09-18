@@ -68,7 +68,7 @@ const buildRoster = (dataArray) => {
     // Test to make sure the row is well formed with at least first/last name -- ignore if empty
     // malformed rows tend to happen at the end of a CSV document
     if(!row.data.hasOwnProperty("firstName") || !row.data.hasOwnProperty("lastName")){
-        return;
+        return (<></>);
     }
     // create a name from the row this will be used to key the roster 
     let name = row.data['firstName'] +" " +row.data['lastName'];

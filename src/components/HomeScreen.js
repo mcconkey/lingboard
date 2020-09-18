@@ -5,7 +5,7 @@ import { Grid,
          Paper,
          } from '@material-ui/core/';
 import Chart from './Chart';
-import Orders from  './Orders';
+import RecentLedgerUpdates from  './RecentLedgerUpdates';
 import ReadingScoresChart from './ReadingScoresChart';
 import ListeningScoresChart from './ListeningScoresChart';
 
@@ -32,10 +32,10 @@ const HomeScreen = () => {
             <ListeningScoresChart />
           </Paper>
         </Grid>
-        {/* Recent Orders */}
+        {/* Recent Recent Ledger Updates */}
         <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <Orders />
+            <RecentLedgerUpdates />
           </Paper>
         </Grid>
       </Grid>

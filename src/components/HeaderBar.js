@@ -11,6 +11,7 @@ import { AppBar,
 
 
 const HeaderBar =  () => {
+    // eslint-disable-next-line no-unused-vars
     const [open, setOpen] = React.useState(true);
     // const handleDrawerOpen = () => {
     //   setOpen(true);
