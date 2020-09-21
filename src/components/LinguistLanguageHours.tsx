@@ -47,11 +47,15 @@ const LinguistLanguageHours = ({ ledgerRows = {} } : LedgerProps) => {
         if(!ledgerHasRows){
              setHours(0);
          }
+
+        let currentMonth = new Date().getMonth();
         let total = 0;
         for (const row in ledgerRows) {
-            
-            if(ledgerRows[row].hasOwnProperty("trainingHours")){
-                total += Number(ledgerRows[row].trainingHours);
+            let rowMonth = new Date(ledgerRows[row].timestamp).getMonth();  
+            if(period === Period.ALL_TIME || currentMonth === rowMonth){
+                if(ledgerRows[row].hasOwnProperty("trainingHours")){
+                    total += Number(ledgerRows[row].trainingHours);
+                }
             }
         }
         
