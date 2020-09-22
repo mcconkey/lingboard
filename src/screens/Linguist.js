@@ -8,6 +8,7 @@ import clsx from 'clsx';
 import useStyles from '../styles/styles'
 import LinguistHistory from '../components/LinguistHistory';
 import LinguistLanguageHours from '../components/LinguistLanguageHours';
+import LinguistHistoryChart from '../components/LinguistHistoryChart';
 
 
 const Linguist = () => {
@@ -39,10 +40,10 @@ const Linguist = () => {
                 {/* Score history chart */}
                 <Grid item xs={12} md={4} lg={6}>
                 <Paper className={fixedHeightPaper}>
-                    <h3>Super cool chart</h3> 
+                    <LinguistHistoryChart ledgerRows={linguist.ledgerRows} />
                 </Paper>
                 </Grid>
-                {/* Recent Deposits */}
+                {/* Scores */}
                 <Grid item xs={12} md={4} lg={3}>
                 <Paper className={fixedHeightPaper}>
                     <h3>Current Scores</h3>
