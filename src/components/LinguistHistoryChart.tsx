@@ -1,84 +1,71 @@
-import React, {useState, useEffect} from 'react';
-import { ButtonGroup, Button } from '@material-ui/core';
-import { ScatterChart, Scatter, XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import moment from 'moment'
+import React from 'react';
+import { ScatterChart, 
+         Scatter, 
+         XAxis, 
+         YAxis, 
+         CartesianGrid, 
+         Tooltip, 
+         Legend, 
+         ResponsiveContainer, } from 'recharts';
+import moment from 'moment';
+import {ScoreDatum, LedgerProps} from '../types/LinguistBoardTypes';
 
-type LedgerProps = {
-    ledgerRows: {
-        [index: string]: {
-            timestamp: string,
-            trainingHours: string,
-            reading: string,
-            listening: string,
-        };
-    },
-}
-
-type ScoreDatum = {
-    score: string;
-    date: string;
-};
-
-const data01 = [
-                    {x: 1503617297689, y: 2}, 
-                    {x: 1503616962277, y: 2.5}, 
-                    {x: 1503616882654, y: 2}, 
-                    {x: 1503611308914, y: 2.5}, 
-                     ];
-const data02 = [
-                    {x: 1503617297689, y: 1.5}, 
-                    {x: 1503616962277, y: 2}, 
-                    {x: 1503616882654, y: 2}, 
-                    {x: 1503611308914, y: 2.5}, 
-                     ];
-
-
-
-
-
+/**
+ * Given a list of ledger Rows this component uses recharts library to display
+ * both the reading and listening scores found in the ledgerRows and plots them
+ * in a scatter chart with connecting lines.
+ * @param ledgerRows -- passed objectArray of ledgerRow objects from parent component
+ */
 const LinguistHistoryChart = ({ ledgerRows = {} } : LedgerProps) => {
 
-    // const [readingData, setReadingData] = useState<ScoreDatum[]>([]);
-    // const [listeningData, setListeningData] = useState<ScoreDatum[]>([]);
-
-    // determine if any rows have been passed
-    const ledgerHasRows: boolean = Object.keys(ledgerRows).length > 0 ? true : false;
-
- 
-
+    // initialize the listening and reading data arrays as arrays of Score Datums
+    // {score: string, date: Number (unix timestamp) }
     let listeningData: ScoreDatum[] = [];
     let readingData: ScoreDatum[] = [];
 
+    // iterate over the ledger rows
     for (const row in ledgerRows) {
-        //TODO: take timestamp make it a unix timestamp with moment js 
+    
+        // if the row has the reading prop and it's not empty then...
         if(ledgerRows[row].hasOwnProperty("reading") && ledgerRows[row].reading !== ""){
-            readingData.push({score: ledgerRows[row].reading, date: ledgerRows[row].timestamp});
+            // init and format a unix timestamp from the row (row times can be whatever 
+            // spreadsheet software use as format.  As long as it's resonable moment should
+            // be able to turn it into a unix timestamp.
+            let unixTime = moment(ledgerRows[row].timestamp).unix();
+            readingData.push({score: ledgerRows[row].reading, date: unixTime});
         }
 
+        // it is possible (and likely) that one row contains both listening & reading prop.
+        // if the row has the listening prop and it's not empty then ... 
         if(ledgerRows[row].hasOwnProperty("listening") && ledgerRows[row].listening !== ""){
-            listeningData.push({score: ledgerRows[row].listening, date: ledgerRows[row].timestamp});
+            let unixTime = moment(ledgerRows[row].timestamp).unix();
+            listeningData.push({score: ledgerRows[row].listening, date: unixTime});
         }
     }
-
-      
    
-
-    console.log(listeningData);
-
+    // Return a React Fragment to render
     return (
           <React.Fragment>
             <ResponsiveContainer>
                 <ScatterChart >
                 <CartesianGrid  />
                 <XAxis
-                        type="number" 
+                        type="number"  // unix timestamp
                         dataKey={'date'} 
                         name='Date' 
-                        domain = {['auto', 'auto']}
-                        tickFormatter = {(datetime) => moment(datetime).format('MMM YY')} />
+                        domain = {['auto', 'auto']} 
+                        // tickFormater turns the timestamp into something more readable when 
+                        // rendered on axis
+                        tickFormatter = {(datetime) => moment.unix(datetime).format('MMM YY')} />
                 <YAxis type="number" dataKey={'score'} name='Score' domain={[0, 5]} ticks={[.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5]} />
-                <ZAxis range={[100]}/>
                 <Legend/>
+                <Tooltip  formatter={(value, name) => { // iterates over x and y values 
+                        if(name === 'Date'){ // if the name is Date -- format to human
+                            return (moment.unix(Number(value)).format('MMM YY'));
+                        }else{
+                            return value; // else (the score acess), just return value
+                        }   
+                    }}/>
                 <Scatter name='Reading' data={readingData} fill='#FF2211' line shape="circle"/>
                 <Scatter name='Listening' data={listeningData} fill='#1122FF' line shape="circle" />
                 </ScatterChart>

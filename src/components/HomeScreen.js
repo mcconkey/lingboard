@@ -4,10 +4,10 @@ import useStyles from '../styles/styles'
 import { Grid,
          Paper,
          } from '@material-ui/core/';
-import Chart from './Chart';
 import RecentLedgerUpdates from  './RecentLedgerUpdates';
 import ReadingScoresChart from './ReadingScoresChart';
 import ListeningScoresChart from './ListeningScoresChart';
+import LanguageHoursChart from './LanguageHoursChart';
 
 
 const HomeScreen = () => {
@@ -18,7 +18,7 @@ const HomeScreen = () => {
         {/* Chart */}
         <Grid item xs={12} md={4} lg={6}>
           <Paper className={fixedHeightPaper}>
-            <Chart />
+              <LanguageHoursChart />
           </Paper>
         </Grid>
         {/* Recent Deposits */}
