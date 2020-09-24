@@ -17,6 +17,7 @@
     "@types/react-router-dom": "^5.1.5",
     "@types/recharts": "^1.8.15",
     "moment": "^2.29.0",
+    "nanoid": "^3.1.12",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-papaparse": "^3.8.0",

@@ -54,7 +54,7 @@ const totalScores = (roster = {}) => {
             if(roster[linguist].attributes?.hasOwnProperty("reading")){
 
                 // set reading score make sure that score is typed as a Number to facilitate comparision
-                let readingScore = Number(roster[linguist].attributes.reading);
+                let readingScore = Number(roster[linguist].attributes.reading.value);
                 
                 //increment the correct score bucket
                 if(readingScore < 2){
@@ -85,7 +85,8 @@ export default function ScoresChart() {
       <ResponsiveContainer>
         <PieChart>
         <Pie
-          data={readingData} 
+          data={readingData}
+          dataKey={'value'} 
           //innerRadius={60}
           outerRadius='100%' 
           fill="#8884d8"
@@ -95,7 +96,7 @@ export default function ScoresChart() {
           //paddingAngle={5}
         >
         	{
-          	readingData.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]}/>)
+          	readingData.map((entry, index) => <Cell key={"rc-" + index} fill={COLORS[index % COLORS.length]}/>)
           }
         </Pie>
         <Tooltip />

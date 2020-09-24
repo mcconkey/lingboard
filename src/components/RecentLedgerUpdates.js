@@ -1,6 +1,4 @@
 import React from 'react';
-import Link from '@material-ui/core/Link';
-import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -11,22 +9,15 @@ import { useRecoilValue } from 'recoil';
 import { latestLedgerState } from '../selectors/ledgerSelector';
 
 
-function preventDefault(event) {
-  event.preventDefault();
-}
-
-const useStyles = makeStyles((theme) => ({
-  seeMore: {
-    marginTop: theme.spacing(3),
-  },
-}));
-
-const Orders = () => {
-  const classes = useStyles();
+const RecentLedgerHistory = () => {
 
   //const data = useRecoilValue(ledgerState);
   const data = useRecoilValue(latestLedgerState);
 
+
+  if(data.length < 1){
+    return (<></>);
+  }
   return (
     <React.Fragment>
       <Title>Recent Ledger Entries</Title>
@@ -35,12 +26,12 @@ const Orders = () => {
           <TableRow>
             <TableCell>Date</TableCell>
             <TableCell>Name</TableCell>
-            <TableCell>Change</TableCell>
+            <TableCell>Changes</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {data.length && data.map((row) => (
-            <TableRow>
+            <TableRow key={row.id}>
               <TableCell>{row.data.timestamp}</TableCell>
               <TableCell>{row.data.firstName + " " + row.data.lastName}</TableCell>
               <TableCell>{displayChange(row.data)}</TableCell>
@@ -48,11 +39,6 @@ const Orders = () => {
           ))}
         </TableBody>
       </Table>
-      <div className={classes.seeMore}>
-        <Link color="primary" href="#" onClick={preventDefault}>
-          See more orders
-        </Link>
-      </div>
     </React.Fragment>
   );
 };
@@ -71,4 +57,4 @@ const displayChange = (rowArray) => {
   return changesString;
 };
 
-export default Orders;
+export default RecentLedgerHistory;

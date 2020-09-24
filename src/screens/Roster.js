@@ -38,18 +38,29 @@ const Roster = () => {
             <TableRow key={key}>
                 <TableCell><Link to={`linguist/${toUrl(key)}`}>{roster[key].name}</Link></TableCell>
                 <TableCell>
-                    { roster[key].attributes.hasOwnProperty("reading") ? 
-                    roster[key].attributes["reading"] : "-"
-                }</TableCell>
-                <TableCell>
-                    { roster[key].attributes.hasOwnProperty("listening") ? 
-                    roster[key].attributes["listening"] : "-" }
+                    { 
+                      roster[key].attributes?.reading?.value ?
+                      roster[key].attributes.reading.value : "-"
+                    }
                 </TableCell>
                 <TableCell>
-                    { roster[key].attributes.hasOwnProperty("trainingHours") ? 
-                    roster[key].attributes["trainingHours"] : "-"}</TableCell>
-                <TableCell>{                    roster[key].attributes.hasOwnProperty("nextSLTE") ? 
-                    roster[key].attributes["nextSLTE"] : "-"}</TableCell>
+                    { 
+                      roster[key].attributes?.listening?.value ? 
+                      roster[key].attributes.listening.value : "-" 
+                    }
+                </TableCell>
+                <TableCell>
+                    { 
+                      roster[key].attributes?.trainingHours?.value ? 
+                      roster[key].attributes.trainingHours.value : "-"
+                    }
+                  </TableCell>
+                <TableCell>
+                  {
+                    roster[key].attributes?.nextSLTE?.value ? 
+                    roster[key].attributes.nextSLTE.value : "-"
+                  }
+                </TableCell>
             </TableRow>
           ))}
         </TableBody>

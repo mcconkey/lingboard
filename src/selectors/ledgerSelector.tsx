@@ -1,5 +1,4 @@
-import { constants } from 'crypto';
-import { selector, useRecoilValue } from 'recoil';
+import { selector } from 'recoil';
 import { ledgerState } from '../atoms/ledgerAtom';
 
 export const latestLedgerState = selector({

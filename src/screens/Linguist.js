@@ -25,8 +25,6 @@ const Linguist = () => {
     }else{
         linguistNotFound = true;
     }
-
-    console.log(linguist);
     
     return(
             <React.Fragment>
@@ -48,8 +46,8 @@ const Linguist = () => {
                 <Paper className={fixedHeightPaper}>
                     <h3>Current Scores</h3>
                     <h2 style={{fontSize: '2rem'}}>
-                        {!linguistNotFound && linguist.attributes.reading ? "R" + linguist.attributes.reading : "-"}{", "} 
-                        {!linguistNotFound && linguist.attributes.listening ? "L"+ linguist.attributes.listening: "-"}
+                        {!linguistNotFound && linguist.attributes.reading.value ? "R" + linguist.attributes.reading.value : "-"}{", "} 
+                        {!linguistNotFound && linguist.attributes.listening.value ? "L"+ linguist.attributes.listening.value: "-"}
                     </h2>
                 </Paper>
                 </Grid>
@@ -68,7 +66,5 @@ const Linguist = () => {
 
        </React.Fragment>);
 }
-
-
 
 export default Linguist;

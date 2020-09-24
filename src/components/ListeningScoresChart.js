@@ -54,7 +54,7 @@ const totalScores = (roster = {}) => {
             if(roster[linguist].attributes?.hasOwnProperty("listening")){
 
                 // set reading score make sure that score is typed as a Number to facilitate comparision
-                let listeningScore = Number(roster[linguist].attributes.listening);
+                let listeningScore = Number(roster[linguist].attributes.listening.value);
                 
                 //increment the correct score bucket
                 if(listeningScore < 2){
@@ -85,7 +85,8 @@ export default function ListeningScoresChart() {
       <ResponsiveContainer>
         <PieChart>
         <Pie
-          data={listeningData} 
+          data={listeningData}
+          dataKey={'value'}  
           //innerRadius={60}
           outerRadius='100%' 
           fill="#8884d8"
@@ -95,7 +96,7 @@ export default function ListeningScoresChart() {
           //paddingAngle={5}
         >
         	{
-          	listeningData.map((entry, index) => <Cell fill={COLORS[index % COLORS.length]}/>)
+          	listeningData.map((entry, index) => <Cell key={"lc-" + index} fill={COLORS[index % COLORS.length]}/>)
           }
         </Pie>
         <Tooltip />

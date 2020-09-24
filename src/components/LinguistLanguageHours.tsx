@@ -63,7 +63,6 @@ const LinguistLanguageHours = ({ ledgerRows = {} } : LedgerProps) => {
 
     }, [ledgerRows, period, setHours, ledgerHasRows])
 
-    console.log("blah2");
     return(
         <React.Fragment>
             <h3 style={{fontSize: '3rem', marginTop: '0px'}}>{hours}</h3> 

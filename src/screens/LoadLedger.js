@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { CSVReader } from 'react-papaparse'
 import { useRecoilState } from 'recoil';
+import { nanoid } from 'nanoid';
 import { ledgerState } from '../atoms/ledgerAtom';
 import { rosterState } from '../atoms/rosterAtom';
 import { Linguist } from '../classes/Linguist';
@@ -13,13 +14,19 @@ const LoadLedger = () => {
 
     const [loadedData, setLoadedData] = useState([]);
 
+
     useEffect(() => {
+      if(loadedData.length > 0){
         setLedger(loadedData);
+      }
     }, [loadedData, setLedger]);
 
     //console.log(ledger);
 
     const handleOnDrop = (data) => {
+
+        // iterate over data to add a unique id to each ledger row
+        data.forEach((row) => row.id = nanoid(10));
         setLoadedData(data);
         setRoster(buildRoster(data));
       }
@@ -46,7 +53,7 @@ const LoadLedger = () => {
         >
           <span>Drop CSV file here or click to upload.</span>
         </CSVReader>
-        <h3>{Object.keys(ledger).length} ledger rows ingested</h3>
+        <h3>{Object.keys(loadedData).length} ledger rows ingested</h3>
         <h3>{Object.keys(roster).length} linguists on the roster</h3>
         </div>
     );
@@ -64,6 +71,7 @@ const buildRoster = (dataArray) => {
   // TODO: maybe refactor as a forEach to placate eslint
   // eslint-disable-next-line array-callback-return
   dataArray.map((row) => {
+
 
     // Test to make sure the row is well formed with at least first/last name -- ignore if empty
     // malformed rows tend to happen at the end of a CSV document
