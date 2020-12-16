@@ -8,7 +8,7 @@ import SideNavigation from '../components/SideNavigation';
 import HeaderBar from '../components/HeaderBar';
 import useStyles from '../styles/styles';
 import HomeScreen from '../components/HomeScreen';
-import { BrowserRouter, Switch, Route, Link } from 'react-router-dom';
+import { HashRouter, Switch, Route, Link } from 'react-router-dom';
 import LoadLedger from './LoadLedger';
 import Linguist from './Linguist';
 import Roster from './Roster';
@@ -37,7 +37,7 @@ export default function Dashboard() {
   //const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
     <div className={classes.root}>
       <CssBaseline />
         <HeaderBar />
@@ -66,6 +66,6 @@ export default function Dashboard() {
         </Container>
       </main>
     </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
